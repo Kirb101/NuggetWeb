@@ -41,24 +41,24 @@
             <input type="submit" value="Sign Up">
         </form>
     </div>
-
+    
     <script>
         document.getElementById("signup-form").addEventListener("submit", function(event) {
             event.preventDefault(); // Prevent the default form submission
             var email = document.getElementById("email-input").value;
-
+    
             // Send the email to the PHP script using AJAX
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "submit.php", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.open("GET", "submit.php?email=" + email, true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     // Handle the response if needed
                     console.log(xhr.responseText);
                 }
             };
-            xhr.send("email=" + email);
+            xhr.send();
         });
     </script>
+
 </body>
 </html>
