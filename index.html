@@ -36,10 +36,29 @@
     <div class="container">
         <h1>AWETheBrowser Alpha Signup</h1>
         <p>(Only for Windows 11, support coming to macOS 14 Sonoma soon)</p>
-        <form method="post" action="submit.php"> <!-- Added form attributes -->
-            <input type="text" name="email" placeholder="E-Mail">
+        <form id="signup-form">
+            <input type="text" id="email-input" placeholder="E-Mail">
             <input type="submit" value="Sign Up">
         </form>
     </div>
+
+    <script>
+        document.getElementById("signup-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            var email = document.getElementById("email-input").value;
+
+            // Send the email to the PHP script using AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "submit.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Handle the response if needed
+                    console.log(xhr.responseText);
+                }
+            };
+            xhr.send("email=" + email);
+        });
+    </script>
 </body>
 </html>
