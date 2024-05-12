@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NuggetWeb</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #282c34;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 38pt;
+      color: #fff;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    button:hover {
+      background-color: #45a049;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    button:focus {
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>NuggetWeb</h1>
+    <button id="downloadBtn">Download</button>
+  </div>
+
+  <script>
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+      window.location.href = 'https://github.com/Kirb101/Browser/releases/download/Nugget_2/beloved_nuggets.exe';
+    });
+  </script>
+</body>
+</html>
