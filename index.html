@@ -11,17 +11,31 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      cursor: none;
+      transition: transform 0.1s ease;
+      background-image: url('bg.png');
+      background-size: cover;
+      background-position: center;
       height: 100vh;
-      background-color: #282c34;
+    }
+
+    .content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
     }
 
     .container {
       text-align: center;
+      margin-right: 20px;
     }
 
     h1 {
       font-size: 38pt;
       color: #fff;
+      text-shadow: 0 0 10px #ff7f50, 0 0 20px #ff7f50, 0 0 30px #ff7f50;
     }
 
     button {
@@ -33,29 +47,147 @@
       border-radius: 8px;
       font-size: 16px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.3s ease, filter 0.3s ease;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
     }
 
     button:hover {
       background-color: #45a049;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      transform: scale(1.2);
+      filter: brightness(75%);
     }
 
     button:focus {
       outline: none;
     }
+
+    button:hover .container {
+      transform: scale(0.75);
+    }
+
+    button:hover {
+      filter: brightness(75%);
+    }
+
+    #customCursor {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 20px solid darkorange;
+      pointer-events: none;
+      transition: width 0.1s ease, height 0.1s ease, background-color 0.1s ease, transform 0.1s ease, opacity 0.3s ease;
+      transform-origin: bottom center;
+    }
+
+    .info-text {
+      font-size: 16px;
+      color: #fff;
+      text-shadow: 0 0 5px #ff7f50;
+      margin-bottom: 20px;
+    }
+
+    .info-text a {
+      color: #ff7f50;
+      text-decoration: none;
+    }
+
+    .info-text a:hover {
+      text-decoration: underline;
+    }
+
+    .image-container {
+      max-width: 100%;
+      height: auto;
+      position: relative;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>NuggetWeb</h1>
-    <button id="downloadBtn">Download</button>
+  <div class="content">
+    <div class="container">
+      <h1>NuggetWeb</h1>
+      <button id="downloadBtn">Download</button>
+      <p class="info-text">Nuggetweb is a web browser developed by AWETheBird. It's open source <a href="https://github.com/Kirb101/Browser" target="_blank" rel="noopener">here</a>.</p>
+    </div>
+    
+    <div class="image-container">
+      <img src="https://tinyurl.com/5n79wmj5" alt="NuggetWeb Image">
+    </div>
   </div>
 
+  <div id="customCursor"></div>
+
   <script>
+    var customCursor = document.getElementById('customCursor');
+    var imageContainer = document.querySelector('.image-container');
+    var isInsideImage = false;
+
     document.getElementById('downloadBtn').addEventListener('click', function() {
-      window.location.href = 'https://github.com/Kirb101/Browser/releases/download/Nugget_2/beloved_nuggets.exe';
+      window.location.href = 'https://github.com/Kirb101/Browser/releases/download/Nugget_4/nuggetweb.exe';
+      setTimeout(function() {
+        window.location.href = 'https://awethebird.neocities.org/HomePage/homepage.html';
+      }, 1000); // Redirect after 1 second (1000 milliseconds)
+    });
+
+    document.addEventListener('mousemove', function(e) {
+      customCursor.style.top = e.pageY + 'px';
+      customCursor.style.left = e.pageX + 'px';
+
+      if (!isInsideImage) {
+        var mouseX = e.clientX;
+        var windowWidth = window.innerWidth;
+        var tiltAmount = ((mouseX / windowWidth) - 0.5) * 50; // Increased intensity
+        customCursor.style.transform = 'rotate(' + tiltAmount + 'deg)';
+      } else {
+        customCursor.style.transform = 'none';
+      }
+    });
+
+    var links = document.querySelectorAll('a, button');
+    links.forEach(function(link) {
+      link.addEventListener('mouseover', function() {
+        customCursor.style.opacity = '0';
+      });
+      link.addEventListener('mouseout', function() {
+        customCursor.style.opacity = '1';
+      });
+    });
+
+    document.addEventListener('click', function() {
+      customCursor.style.filter = 'brightness(50%)';
+      setTimeout(function() {
+        customCursor.style.filter = 'none';
+      }, 100); // Dim for 0.1 seconds
+    });
+
+    imageContainer.addEventListener('mouseover', function() {
+      isInsideImage = true;
+      customCursor.style.width = '32px';
+      customCursor.style.height = '32px';
+      customCursor.style.border = 'none';
+      customCursor.style.background = 'url(https://awethebird.neocities.org/cursor.png) no-repeat center center';
+      customCursor.style.backgroundSize = 'contain';
+      customCursor.style.transform = 'none'; // Reset transform
+    });
+
+    imageContainer.addEventListener('mouseout', function() {
+      isInsideImage = false;
+      customCursor.style.width = '0';
+      customCursor.style.height = '0';
+      customCursor.style.borderLeft = '10px solid transparent';
+      customCursor.style.borderRight = '10px solid transparent';
+      customCursor.style.borderBottom = '20px solid darkorange';
+      customCursor.style.background = 'none';
     });
   </script>
 </body>
