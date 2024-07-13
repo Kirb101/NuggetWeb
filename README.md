@@ -1,6 +1,8 @@
 # NuggyNet
 ### A web browser developed by AWETheBird only because he was bored.
 
+# This is read-only now. Go to the [NEW REPO](https://www.github.com/NuggyNet/NuggyNet) for updates.
+
 ~AWETheBrowser~ / ~NuggetWeb~ / NuggyNet is based off the PyQt5 framework. Sadly, PyQtWebEngine is based off Chromium, but sometime I will try to make my own web engine titled "WebNoctis"!
 
 Below, you can see a picture of NuggyNet v1.4. I'm too lazy to update the image so here's a picture of NuggetWeb v1.4
